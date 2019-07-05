@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">        
+        <div class="col-xs-6 col-md-6 col-md-offset-3 app-form">
+                <h2>SignUp Account</h2>
+                <div class="alert alert-danger" *ngIf="formError">
+                    <p>An error occurred!</p>
+                </div>
+                <div class="alert alert-success" *ngIf="userCreated">
+                    User signup successfully!
+                </div>
+                <form class="example-container" [formGroup]="signUpForm" (ngSubmit)="signup()">
+                    <mat-form-field style="width: 100%">
+                        <input matInput placeholder="Email" id="email" formControlName="email" >                        
+                    </mat-form-field>
+                    <mat-form-field style="width: 100%">
+                            <input type="password" formControlName="password" matInput id="password" placeholder="Password">
+                    </mat-form-field>
+                    <mat-form-field style="width: 100%">
+                            <input formControlName="firstName" matInput id="firstName" placeholder="First Name">
+                    </mat-form-field>
+                    <mat-form-field style="width: 100%">
+                            <input matInput id="lastName" formControlName="lastName" placeholder="Last Name">
+                    </mat-form-field>
+                    <mat-form-field style="width: 100%">
+                            <textarea matInput placeholder="Address" id="address" formControlName="address"></textarea>
+                        </mat-form-field>
+                    <mat-radio-group style="width: 100%" id="gender" aria-label="Select an option" formControlName="gender">
+                        <mat-radio-button value="male">Male</mat-radio-button>
+                        <mat-radio-button value="female">Female</mat-radio-button>
+                    </mat-radio-group>
+                    
+                    <img [src]="url" height="200"> <br/>
+                    <input type='file' formControlName="profileImage" (change)="onSelectFile($event)">
+                    <br>
+                    <button [disabled]="!signUpForm.valid"  class="btn btn-primary" type="submit"  mat-button>Signup</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.app-form > h2, .app-form > button {
+    text-align: center;
+}
+
+.app-form button {
+    text-align: center;
+}
+
+button {
+    background-color: #286090;
+    color: white !important;
+}

@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle , .mat-radio-outer-circle {
+    border-color: #4B0082 !important;
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    background-color: #4B0082 !important;
+  }
+  .mat-radio-button {
+      padding: 16px;
+  }
