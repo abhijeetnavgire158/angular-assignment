@@ -1,8 +1,7 @@
 export class Auth {
     constructor(
         public email: string,
-        public firstName: string,
-        public lastName: string,
+        public userId: string,
         private _token:string,
         private _expirationDate: Date
     ) {}

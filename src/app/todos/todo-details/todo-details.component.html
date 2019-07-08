@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-xs-12">
+        <img [src]="todo.attached" alt="{{ todo.name }}" class="img-responsive" style="max-height: 150px;">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Todo Title :{{ todo.title }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Todo Date :{{ todo.todoDate | date }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Categories : 
+        <span *ngFor="let category of categoriesList; let i=index">
+            <div style="padding-left: 50px" *ngIf="todo.categories[i]">
+                {{ category }}
+            </div>
+        </span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Is Reminder :{{ todo.isReminder  }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Reminder Date :{{ todo.reminderDate | date }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Is Public :{{ todo.isPublic  }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="btn-group" appDropdown>
+            <button type="button" class="btn btn-primary dropdown-toggle">
+                Manage Todo <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a style="cursor: pointer;" (click)="onEditTodo()">Edit Todo</a></li>
+                <li><a style="cursor: pointer;" (click)="onDeleteTodo()">Delete Todo</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

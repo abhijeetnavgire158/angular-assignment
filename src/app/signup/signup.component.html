@@ -4,6 +4,7 @@
                 <h2>SignUp Account</h2>
                 <div class="alert alert-danger" *ngIf="formError">
                     <p>An error occurred!</p>
+                    <p>{{ formError.error.error.message == 'EMAIL_EXISTS' ? 'Email is already exists!' : '' }}</p>
                 </div>
                 <div class="alert alert-success" *ngIf="userCreated">
                     User signup successfully!

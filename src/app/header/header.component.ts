@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatMenuPanel } from '@angular/material';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +10,22 @@ import { MatMenuPanel } from '@angular/material';
 })
 export class HeaderComponent implements OnInit {
 
+  isAuthenticated: boolean = false;
   @Input('matMenuTriggerFor') menu: MatMenuPanel<any>
-  constructor() { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.userService.userAuth.subscribe((auth) => {
+      this.isAuthenticated = false;
+      if (auth) {
+        this.isAuthenticated = true;
+      }      
+    });
+  }
+
+  onLogout() {
+    this.userService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

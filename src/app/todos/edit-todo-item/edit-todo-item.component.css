@@ -1,0 +1,16 @@
+.checkbox-margin {
+    padding-top: 46px;
+    padding-right: 16px;
+}
+
+.mat-radio-button {
+    padding: 0px
+}
+
+.button-group {
+    margin-bottom: 50px;
+}
+
+.button {
+    margin-left: 20px !important;
+}

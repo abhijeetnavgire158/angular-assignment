@@ -64,6 +64,8 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/login']);
         }, 500);
         
+    }, (error) => {
+      this.formError = error;
     });    
   }
 }

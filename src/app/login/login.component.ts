@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, EmailValidator } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +9,13 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isFetching: boolean = false;
   loginForm: FormGroup;
   formError: boolean = false;
+  errorMessage: string = 'An error occurred!';
   userLogin: boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -21,8 +24,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onLogin() {    
-    this.userService.loginUser(this.loginForm.value.email, this.loginForm.value.password);
+  onLogin() {   
+    this.isFetching = true; 
+    this.userService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
+    .subscribe((responseData) => {
+      this.formError = false;
+      this.errorMessage = '';
+      this.userLogin = true;
+      setTimeout(() => {
+        this.isFetching = false;
+        this.router.navigate(['/users']);
+      }, 1000);
+    }, (errorMessage) => {
+        this.isFetching = false;
+        this.formError = true;
+        this.errorMessage = errorMessage
+    });
   }
 
   onClear() {
@@ -30,7 +47,4 @@ export class LoginComponent implements OnInit {
     this.formError = false;
     this.userLogin = false;
   }
-
-  
-
 }
