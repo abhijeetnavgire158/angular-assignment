@@ -1,28 +1,20 @@
 <div class="row">
     <div class="col-xs-12">
-        <button class="btn btn-success" (click)="onNewTodo()">New ToDo</button> | 
+        <button class="btn btn-success" (click)="onNewTodo()">New ToDo</button> |
         <button class="btn btn-primary" (click)="onClearFilter()">Clear Filter</button>
     </div>
 </div>
 <hr>
 <div class="col-xs-12">
     <mat-form-field>
-        <input 
-            matInput 
-            [matDatepicker]="picker" 
-            name="fromDate" 
-            placeholder="Choose a from date"
+        <input matInput [matDatepicker]="picker" name="fromDate" placeholder="Choose a from date"
             [(ngModel)]="fromDatepicker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     to
     <mat-form-field>
-        <input 
-            matInput 
-            [matDatepicker]="picker2" 
-            name="toDate" 
-            placeholder="Choose a to date"
+        <input matInput [matDatepicker]="picker2" name="toDate" placeholder="Choose a to date"
             [(ngModel)]="toDatepicker">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
@@ -37,7 +29,9 @@
 <hr>
 <div class="row" *ngIf="!isFetching">
     <div class="col-xs-12">
-        <app-todo-item *ngFor="let todo of todos | dateFilter:fromDatepicker:toDatepicker | titleFilter:filterString; let i = index" [todo]="todo" [index]="i">
+        <app-todo-item
+            *ngFor="let todo of todos | dateFilter:fromDatepicker:toDatepicker | titleFilter:filterString; let i = index"
+            [todo]="todo" [index]="i">
         </app-todo-item>
     </div>
 </div>

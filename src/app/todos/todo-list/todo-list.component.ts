@@ -14,12 +14,12 @@ import { FormControl } from '@angular/forms';
 export class TodoListComponent implements OnInit {
   isFetching: boolean = false;
   filterString: string = '';
-  todos: Todo[];  
+  todos: Todo[];
   subscription: Subscription;
   fromDatepicker: string = '';
   toDatepicker: string = '';
 
-  constructor(private router: Router, private route: ActivatedRoute, private todoService: TodoService ) { }
+  constructor(private router: Router, private route: ActivatedRoute, private todoService: TodoService) { }
 
   ngOnInit() {
     this.subscription = this.todoService.todosChanged
@@ -29,17 +29,17 @@ export class TodoListComponent implements OnInit {
       .subscribe(
         (todos: Todo[]) => {
           this.todos = todos;
-          setTimeout(() => {this.isFetching = false;}, 1000);
+          setTimeout(() => { this.isFetching = false; }, 1000);
         }
       );
-    
+
     this.todos = this.todoService.getTodoItems();
 
     console.log(this.todos);
   }
 
   onNewTodo() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
   onClearFilter() {

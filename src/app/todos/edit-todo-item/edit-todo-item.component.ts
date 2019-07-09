@@ -9,7 +9,7 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./edit-todo-item.component.css']
 })
 export class EditTodoItemComponent implements OnInit {
-  @ViewChild('reminderDatectrl', {static: false}) reminderDatectrl: FormControl;
+  @ViewChild('reminderDatectrl', { static: false }) reminderDatectrl: FormControl;
   id: number;
   editMode = false;
   todoForm: FormGroup;
@@ -18,20 +18,20 @@ export class EditTodoItemComponent implements OnInit {
   categoriesList: string[];
 
   constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private todoService: TodoService
-    ) {
-      this.route.params.subscribe((params: Params) => {
+    private route: ActivatedRoute,
+    private router: Router,
+    private todoService: TodoService
+  ) {
+    this.route.params.subscribe((params: Params) => {
       this.id = +params['id'],
-      this.editMode = params['id']!=null;
+        this.editMode = params['id'] != null;
       this.categoriesList = this.todoService.categoriesList;
       this.initForm();
     });
-   }
+  }
 
-  ngOnInit() {    
-  }  
+  ngOnInit() {
+  }
 
   onReminderChange() {
     this.todoForm.controls['reminderDate'].setValue(null);
@@ -46,16 +46,16 @@ export class EditTodoItemComponent implements OnInit {
     let isPublic = false;
     let attached = '';
     if (this.editMode) {
-        const todo = this.todoService.getTodoItem(this.id);
-        title = todo.title;
-        todoDate = todo.todoDate;
-        isReminder = todo.isReminder;
-        selectedCategories = todo.categories;
-        this.isReminderChecked = todo.isReminder;
-        reminderDate = todo.reminderDate;
-        isPublic = todo.isPublic;
-        attached = todo.attached;
-        this.attachedFile = todo.attached;
+      const todo = this.todoService.getTodoItem(this.id);
+      title = todo.title;
+      todoDate = todo.todoDate;
+      isReminder = todo.isReminder;
+      selectedCategories = todo.categories;
+      this.isReminderChecked = todo.isReminder;
+      reminderDate = todo.reminderDate;
+      isPublic = todo.isPublic;
+      attached = todo.attached;
+      this.attachedFile = todo.attached;
     }
     this.todoForm = new FormGroup({
       title: new FormControl(title, Validators.required),
@@ -79,7 +79,7 @@ export class EditTodoItemComponent implements OnInit {
         control = new FormControl(i == i);
       } else {
         control = new FormControl(i == -1);
-      }      
+      }
       (this.todoForm.controls.categories as FormArray).push(control);
     });
   }
@@ -99,7 +99,7 @@ export class EditTodoItemComponent implements OnInit {
   }
 
   onSubmit() {
-    this.todoForm.patchValue({attached: this.attachedFile});
+    this.todoForm.patchValue({ attached: this.attachedFile });
     if (this.editMode) {
       this.todoService.updateTodo(this.id, this.todoForm.value);
     } else {
@@ -114,7 +114,7 @@ export class EditTodoItemComponent implements OnInit {
   */
   reminderDateRequired(control: FormControl) {
     if (this.isReminderChecked && (control.value == null || control.value == '')) {
-      return {'reminderDateRequired': true}
+      return { 'reminderDateRequired': true }
     }
 
     return null;

@@ -6,10 +6,10 @@
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li routerLinkActive="active">
+                <li routerLinkActive="active" *ngIf="isAuthenticated">
                     <a routerLink="/users">Users List</a>
                 </li>
-                <li routerLinkActive="active">
+                <li routerLinkActive="active" *ngIf="isAuthenticated">
                     <a routerLink="/todos">ToDo List</a>
                 </li>
             </ul>

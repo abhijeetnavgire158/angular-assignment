@@ -14,26 +14,26 @@ export class TodoDetailsComponent implements OnInit {
   categoriesList: string[];
 
   constructor(
-      private router: Router,
-      private route: ActivatedRoute,
-      private todoService: TodoService
-    ) {
-      this.categoriesList = this.todoService.categoriesList;
+    private router: Router,
+    private route: ActivatedRoute,
+    private todoService: TodoService
+  ) {
+    this.categoriesList = this.todoService.categoriesList;
 
-      this.route.params.subscribe((params: Params) => {
-        this.id = +params['id'];
-        this.todo = this.todoService.getTodoItem(this.id);
-        if (!this.todo) {
-          router.navigate(['/todos']);
-        }
-      });
-    }
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+      this.todo = this.todoService.getTodoItem(this.id);
+      if (!this.todo) {
+        router.navigate(['/todos']);
+      }
+    });
+  }
 
   ngOnInit() {
   }
 
   onEditTodo() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onDeleteTodo() {

@@ -8,8 +8,8 @@ export class User {
         public gender: string,
         public image: string,
         public loginStatus: boolean = false
-    ) {}
-    
+    ) { }
+
     get password() {
         return this._password;
     }

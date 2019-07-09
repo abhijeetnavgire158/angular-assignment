@@ -3,7 +3,8 @@
         <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
             <div class="row button-group">
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success" [disabled]="!todoForm.valid">Save</button> | 
+                    <button type="submit" class="btn btn-success" [disabled]="!todoForm.valid">
+                        {{ editMode ? 'Update' : 'Save' }}</button> |
                     <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
                 </div>
             </div>
@@ -28,18 +29,20 @@
             <div class="row">
                 <div class="col-xs-12">
                     <br><br>
-                    <section class="checkbox-section" formArrayName="categories" *ngFor="let category of todoForm.controls.categories.controls; let i = index">
-                    <mat-checkbox class="checkbox-margin" type="checkbox" [formControlName]="i">
-                        {{categoriesList[i]}}
-                    </mat-checkbox>
-                    </section>                    
-                    <br><br>               
+                    <section class="checkbox-section" formArrayName="categories"
+                        *ngFor="let category of todoForm.controls.categories.controls; let i = index">
+                        <mat-checkbox class="checkbox-margin" type="checkbox" [formControlName]="i">
+                            {{categoriesList[i]}}
+                        </mat-checkbox>
+                    </section>
+                    <br><br>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
                     <section class="checkbox-section">
-                        <mat-checkbox class="checkbox-margin" id="isReminder" (change)="onReminderChange()" formControlName="isReminder" [(ngModel)] = "isReminderChecked" >Is Reminder</mat-checkbox>
+                        <mat-checkbox class="checkbox-margin" id="isReminder" (change)="onReminderChange()"
+                            formControlName="isReminder" [(ngModel)]="isReminderChecked">Is Reminder</mat-checkbox>
                         <br><br>
                     </section>
                 </div>
@@ -47,7 +50,8 @@
             <div class="row" *ngIf="isReminderChecked">
                 <div class="col-xs-12">
                     <mat-form-field>
-                        <input matInput [matDatepicker]="picker"  formControlName="reminderDate" placeholder="Choose a reminder date" #reminderDatectrl >
+                        <input matInput [matDatepicker]="picker" formControlName="reminderDate"
+                            placeholder="Choose a reminder date" #reminderDatectrl>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -56,9 +60,9 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="attached">Image URL</label>                        
-                        <input type='file'  (change)="onSelectFile($event)">
-                        <input type="hidden" id="attachedFile" formControlName="attached" [(ngModel)]="attachedFile" >
+                        <label for="attached">Image URL</label>
+                        <input type='file' (change)="onSelectFile($event)">
+                        <input type="hidden" id="attachedFile" formControlName="attached" [(ngModel)]="attachedFile">
                     </div>
                 </div>
             </div>
@@ -68,8 +72,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">                    
-                        <mat-checkbox class="checkbox-margin" formControlName="isPublic">public</mat-checkbox>
+                <div class="col-xs-12">
+                    <mat-checkbox class="checkbox-margin" formControlName="isPublic">public</mat-checkbox>
                 </div>
             </div>
         </form>

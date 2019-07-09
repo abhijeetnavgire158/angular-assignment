@@ -2,13 +2,13 @@ import { Injectable } from "@angular/core";
 import { Todo } from '../models/todo-model';
 import { Subject } from 'rxjs';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 
 export class TodoService {
     todosChanged = new Subject<Todo[]>();
     private todos: Todo[] = [];
     categoriesList: string[] = ['Done', 'Pending'];
-    
+
     addTodo(newTodo: Todo) {
         this.todos.push(newTodo);
         this.todosChanged.next(this.todos.slice());

@@ -1,22 +1,18 @@
 <div class="col-md-11">
-<a
-  style="cursor: pointer;"
-  [routerLink]="[index]"
-  routerLinkActive="active"
-  class="list-group-item clearfix">
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ todo.title }}</h4>
-    <p class="list-group-item-text">{{ todo.todoDate | date }}</p>
-  </div>  
-</a>
+  <a style="cursor: pointer;" [routerLink]="[index]" routerLinkActive="active" class="list-group-item clearfix">
+    <div class="pull-left">
+      <h4 class="list-group-item-heading">{{ todo.title }}</h4>
+      <p class="list-group-item-text">{{ todo.todoDate | date }}</p>
+    </div>
+  </a>
 </div>
 <div class="col-md-1">
-<span class="pull-left">
+  <span class="pull-left">
     <!-- <img
         [src]="todo.attached"
         alt="{{ todo.title }}"
         class="img-responsive"
         style="max-height: 50px;"> -->
-        <mat-icon style="cursor: pointer" (click)="onDeleteTodo()">delete_outline</mat-icon>
-</span>
+    <mat-icon style="cursor: pointer" (click)="onDeleteTodo()">delete_outline</mat-icon>
+  </span>
 </div>

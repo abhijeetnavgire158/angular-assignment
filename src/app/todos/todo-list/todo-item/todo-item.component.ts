@@ -14,21 +14,20 @@ export class TodoItemComponent implements OnInit {
   @Input() index: number;
 
   constructor(
-      private router: Router,
-      private route: ActivatedRoute,
-      private todoService: TodoService
-    ) {}
+    private router: Router,
+    private route: ActivatedRoute,
+    private todoService: TodoService
+  ) { }
 
   ngOnInit() {
   }
 
   onEditTodo() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onDeleteTodo() {
     this.todoService.deleteTodo(this.index);
     this.router.navigate(['/todos']);
   }
-
 }

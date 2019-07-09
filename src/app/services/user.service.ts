@@ -113,4 +113,21 @@ export class UserService {
         localStorage.removeItem('userData');
         this.userAuth.next(null);
     }
+
+    checkLoggedInUser() {
+        let userData = JSON.parse(localStorage.getItem('userData'));
+        if (!userData) {
+            return null;
+        }
+
+        const loggedUser = new Auth(
+            userData.email, 
+            userData.userId, 
+            userData._token, 
+            new Date(userData._expirationDate)
+        );
+        if (loggedUser.token) {
+            this.userAuth.next(loggedUser);           
+        }        
+    }
 }

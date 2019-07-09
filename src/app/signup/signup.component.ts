@@ -14,10 +14,12 @@ export class SignupComponent implements OnInit {
   url: any = '';
   formError: boolean = false;
   userCreated: boolean = false;
-  
+  isFetching: boolean = false;
+
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.userService.logout();
     //signup form controles and validations
     this.signUpForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -36,7 +38,7 @@ export class SignupComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event) => {
         this.url = reader.result;
-      }     
+      }
     }
   }
 
@@ -45,7 +47,7 @@ export class SignupComponent implements OnInit {
       this.formError = true;
       return false;
     }
-
+    this.isFetching = true;
     const newUser = new User(
       this.signUpForm.value.email,
       this.signUpForm.value.password,
@@ -54,18 +56,20 @@ export class SignupComponent implements OnInit {
       this.signUpForm.value.address,
       this.signUpForm.value.gender,
       this.url
-    );    
-    
+    );
+
     this.userService.saveUser(newUser).subscribe((responseData) => {
-        this.formError = false;
-        this.userCreated =true;
-        this.signUpForm.reset();
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 500);
-        
+      this.formError = false;
+      this.userCreated = true;
+      this.signUpForm.reset();
+      setTimeout(() => {
+        this.isFetching = false;
+        this.router.navigate(['/login']);
+      }, 500);
+
     }, (error) => {
       this.formError = error;
-    });    
+      this.isFetching = false;
+    });
   }
 }
