@@ -11,12 +11,14 @@ import { EditTodoItemComponent } from './todos/edit-todo-item/edit-todo-item.com
 import { TodoDetailsComponent } from './todos/todo-details/todo-details.component';
 
 import { AuthGuard } from './shared/auth.guard';
+import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'users', canActivate: [AuthGuard], component: UserComponent },
+    { path: 'users', canActivate: [AuthGuard], component: UserComponent},
+    { path: 'users/:id/edit', canActivate: [AuthGuard], component: EditProfileComponent },
     {
         path: 'todos', canActivate: [AuthGuard], component: TodosComponent,
         children: [

@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col-xs-12">
         <button class="btn btn-success" (click)="onNewTodo()">New ToDo</button> |
+        <span *ngIf="selectedTodos.length >= 1">
+            <button class="btn btn-danger"  (click)="onDeleteTodos()">Delete Todos</button> |
+        </span>
         <button class="btn btn-primary" (click)="onClearFilter()">Clear Filter</button>
     </div>
 </div>
@@ -27,11 +30,25 @@
 </div>
 <hr>
 <hr>
+<br>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        Order By :
+        <a (click)="setOrder('title')" class="sort-todo">
+            Title
+            <span [hidden]="reverse">▼</span>
+            <span [hidden]="!reverse">▲</span>
+        </a>
+        
+    </div>
+</div>
 <div class="row" *ngIf="!isFetching">
     <div class="col-xs-12">
         <app-todo-item
-            *ngFor="let todo of todos | dateFilter:fromDatepicker:toDatepicker | titleFilter:filterString; let i = index"
-            [todo]="todo" [index]="i">
+            *ngFor="let todo of todos | dateFilter:fromDatepicker:toDatepicker | titleFilter:filterString | orderBy: order:reverse; let i = index"
+            [todo]="todo"
+            (todoSelected)="todoSelected($event)">
         </app-todo-item>
     </div>
 </div>

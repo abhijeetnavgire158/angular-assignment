@@ -10,13 +10,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
+  isFetching: boolean = false;
   constructor(private userService: UserService, private http: HttpClient) { }
 
   ngOnInit() {
-    // this.userService.getUsers().subscribe((users) => {
-      
-    //     console.log(this.users);
-    // });
+    this.isFetching = true;
+    this.userService.getUsers();
+    this.userService.usersChanged.subscribe((users) => {
+      this.isFetching = false;
+      this.users = users;
+    });
   }
 
 }

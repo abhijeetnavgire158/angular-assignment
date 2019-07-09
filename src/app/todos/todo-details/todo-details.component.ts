@@ -10,7 +10,7 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class TodoDetailsComponent implements OnInit {
   todo: Todo;
-  id: number;
+  id: any;
   categoriesList: string[];
 
   constructor(
@@ -21,7 +21,7 @@ export class TodoDetailsComponent implements OnInit {
     this.categoriesList = this.todoService.categoriesList;
 
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
+      this.id = params['id'];
       this.todo = this.todoService.getTodoItem(this.id);
       if (!this.todo) {
         router.navigate(['/todos']);

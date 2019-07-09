@@ -3,7 +3,7 @@ import { User } from '../models/user.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { tap, map, take, exhaustMap, catchError } from 'rxjs/operators';
 
-import { Subject, throwError, BehaviorSubject } from 'rxjs';
+import { Subject, throwError, BehaviorSubject, Observable } from 'rxjs';
 import { Auth } from '../models/auth.model';
 
 
@@ -70,18 +70,26 @@ export class UserService {
         localStorage.setItem('userData', JSON.stringify(authUser));
     }
 
-
     getUsers() {
-        // return this.http.get<User[]>(this.apiUrl+ 'users.json')
-        // .pipe(    
-        //     map(allUsers => {
-        //         console.log('Map');
-        //         console.log(allUsers);
-        //     }),
-        //     tap(allUsers => {
-        //       //this.setUsers(users);
-        //     })
-        //   );   
+        this.users = [];
+        return this.http
+            .get<User[]>(
+                this.apiUrl + 'users.json'
+            )
+            .pipe(
+                map(users => {
+                    let ss = [];
+                    for (const key in users) {
+                        if (users.hasOwnProperty(key)) {
+                            const user = users[key];
+                            this.users.push(user);
+                        }
+                    }
+                    return this.users;
+                })
+            ).subscribe((users) => {
+                this.setUsers(users)
+            });
     }
 
     private handleError(errorRes: HttpErrorResponse) {
@@ -121,13 +129,13 @@ export class UserService {
         }
 
         const loggedUser = new Auth(
-            userData.email, 
-            userData.userId, 
-            userData._token, 
+            userData.email,
+            userData.userId,
+            userData._token,
             new Date(userData._expirationDate)
         );
         if (loggedUser.token) {
-            this.userAuth.next(loggedUser);           
-        }        
+            this.userAuth.next(loggedUser);
+        }
     }
 }

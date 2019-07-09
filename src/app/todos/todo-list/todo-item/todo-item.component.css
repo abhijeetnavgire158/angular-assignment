@@ -1,0 +1,8 @@
+.delete-icon {
+    cursor: pointer; 
+    color: red;
+}
+
+.todo-item {
+    float: left;
+}

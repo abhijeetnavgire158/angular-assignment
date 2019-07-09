@@ -10,7 +10,7 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class EditTodoItemComponent implements OnInit {
   @ViewChild('reminderDatectrl', { static: false }) reminderDatectrl: FormControl;
-  id: number;
+  id: any;
   editMode = false;
   todoForm: FormGroup;
   attachedFile: any;
@@ -23,7 +23,7 @@ export class EditTodoItemComponent implements OnInit {
     private todoService: TodoService
   ) {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'],
+      this.id = params['id'],
         this.editMode = params['id'] != null;
       this.categoriesList = this.todoService.categoriesList;
       this.initForm();

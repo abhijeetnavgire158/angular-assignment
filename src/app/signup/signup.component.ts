@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.userService.logout();
-    //signup form controles and validations
+    //signup form controls and validations
     this.signUpForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),

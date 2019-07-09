@@ -6,6 +6,7 @@ export class Todo {
         public isReminder: boolean,
         public reminderDate: Date,
         public isPublic: boolean,
-        public attached: string
+        public attached: string,
+        public id: string = '_' + Math.random().toString(36).substr(2, 9),
     ) { }
 }

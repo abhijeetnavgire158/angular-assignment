@@ -21,6 +21,11 @@
         <td> {{user.email}} </td>
         <td> {{user.firstName}} {{user.lastName}} </td>
         <td> {{user.gender}} </td>
-        <td> {{user.Address}} </td>
+        <td> {{user.address}} </td>
+    </tr>
+    <tr *ngIf="isFetching">
+        <td colspan="7" style="text-align: center">
+            <app-loading-spinner></app-loading-spinner>
+        </td>
     </tr>
 </table>

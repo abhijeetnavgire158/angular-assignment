@@ -9,23 +9,52 @@ export class TodoService {
     private todos: Todo[] = [];
     categoriesList: string[] = ['Done', 'Pending'];
 
+    generateId(): string {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    }
+
     addTodo(newTodo: Todo) {
-        this.todos.push(newTodo);
+        this.todos.push({...newTodo, id: this.generateId()});
         this.todosChanged.next(this.todos.slice());
     }
 
-    updateTodo(index: number, newTodo: Todo) {
+    /*updateTodo(index: number, newTodo: Todo) {
         this.todos[index] = newTodo;
         this.todosChanged.next(this.todos.slice());
-    }
+    }*/
 
-    deleteTodo(index: number) {
-        this.todos.splice(index, 1);
+    updateTodo(id: string, newTodo: Todo) {
+        let index = this.todos.findIndex((value) => value.id == id);
+        this.todos[index] = {...newTodo, id: this.generateId()};
         this.todosChanged.next(this.todos.slice());
     }
 
-    getTodoItem(index: number) {
-        return this.todos[index];
+    // deleteTodo(index: number) {
+    //     this.todos.splice(index, 1);
+    //     this.todosChanged.next(this.todos.slice());
+    // }
+
+    deleteTodo(id: string) {
+        var filtered = this.todos.filter(function(value, index, arr){
+            return value.id != id;        
+        });
+        this.todos = filtered;
+        this.todosChanged.next(this.todos.slice());
+    }
+
+    deleteMultipleTodo(id: string[]) {
+        var filtered = this.todos.filter(function(value, index, arr){
+            return !id.includes(value.id);
+        });
+        this.todos = filtered;
+        this.todosChanged.next(this.todos.slice());
+    }
+
+    // getTodoItem(index: number) {
+    //     return this.todos[index];
+    // }
+    getTodoItem(id: string) {
+        return this.todos.find(x => x.id == id);
     }
 
     getTodoItems() {

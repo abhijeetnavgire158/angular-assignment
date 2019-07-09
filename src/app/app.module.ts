@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 //custom module
 import { MatInputsModule } from './mat-inputs.module';
 import { TodosModule } from './todos/todos.module';
+import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TodosModule } from './todos/todos.module';
     SignupComponent,
     LoginComponent,
     UserComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

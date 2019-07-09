@@ -14,6 +14,7 @@ import { DateFilterPipe } from './filter/date-filter.pipe';
 import { TitleFilterPipe } from './filter/title-filter.pipe';
 import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
 import { DropdownDirective } from '../shared/dropdown.directive';
+import { OrderByPipe } from './filter/order-by.pipe';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { DropdownDirective } from '../shared/dropdown.directive';
         DateFilterPipe,
         TitleFilterPipe,
         LoadingSpinnerComponent,
-        DropdownDirective
+        DropdownDirective,
+        OrderByPipe
     ],
     imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, MatInputsModule],
     exports: [
@@ -40,7 +42,7 @@ import { DropdownDirective } from '../shared/dropdown.directive';
         TitleFilterPipe,
         LoadingSpinnerComponent,
         DropdownDirective
-    ],
+       ],
     providers: [],
 })
 export class TodosModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from 'src/app/models/todo-model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TodoService } from 'src/app/services/todo.service';
@@ -11,8 +11,8 @@ import { TodoService } from 'src/app/services/todo.service';
 export class TodoItemComponent implements OnInit {
 
   @Input() todo: Todo;
-  @Input() index: number;
-
+  @Output() todoSelected = new EventEmitter<string>();
+  selectedTodos: string[] = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -27,7 +27,11 @@ export class TodoItemComponent implements OnInit {
   }
 
   onDeleteTodo() {
-    this.todoService.deleteTodo(this.index);
+    this.todoService.deleteTodo(this.todo.id);
     this.router.navigate(['/todos']);
+  }
+
+  multiTodoSelect(id: string) {    
+    this.todoSelected.emit(id);
   }
 }

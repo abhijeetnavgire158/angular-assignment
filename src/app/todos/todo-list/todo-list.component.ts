@@ -12,12 +12,15 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
+  selectedTodos: string[] = [];
   isFetching: boolean = false;
   filterString: string = '';
   todos: Todo[];
   subscription: Subscription;
   fromDatepicker: string = '';
   toDatepicker: string = '';
+  order: string = 'title';
+  reverse: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private todoService: TodoService) { }
 
@@ -34,8 +37,6 @@ export class TodoListComponent implements OnInit {
       );
 
     this.todos = this.todoService.getTodoItems();
-
-    console.log(this.todos);
   }
 
   onNewTodo() {
@@ -47,5 +48,28 @@ export class TodoListComponent implements OnInit {
     this.fromDatepicker = '';
     this.filterString = '';
     this.router.navigate(['/todos']);
+  }
+
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+
+    this.order = value;
+    console.log(this.todos);
+  }
+
+  todoSelected(id: string) {    
+    var index = this.selectedTodos.indexOf(id);
+    if (index > -1) {
+      this.selectedTodos.splice(index, 1);
+    } else {
+      this.selectedTodos.push(id);
+    }
+  }
+
+  onDeleteTodos() {    
+    this.todoService.deleteMultipleTodo(this.selectedTodos);
+    this.selectedTodos = [];
   }
 }
