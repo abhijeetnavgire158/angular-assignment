@@ -21,6 +21,16 @@
                     <a [routerLink]="[ '/signup']">SignUp</a>
                 </li>
                 <li style="cursor: pointer" *ngIf="isAuthenticated">
+                    <a [routerLink]="['/users/edit-profile']">
+                        <img id="userProfilePic" [src]="userData.hasOwnProperty('image') ? userData.image : ''"
+                            class="rounded-circle img-thumbnail" alt="Profile Image"> welcome,
+
+                        <span id="loggedInUserName">
+                            {{ userData.firstName + ' ' + userData.lastName }}
+                        </span>
+                    </a>
+                </li>
+                <li style="cursor: pointer" *ngIf="isAuthenticated">
                     <a (click)="onLogout()">Logout</a>
                 </li>
                 <li>
@@ -28,9 +38,9 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item [routerLink]="['/users/edit-profile']">
                             <mat-icon>description</mat-icon>
-                            <span><a [routerLink]="[ '/users/1/edit']">Edit Profile</a></span>
+                            <span>Edit Profile</span>
                         </button>
                         <button mat-menu-item>
                             <mat-icon>settings</mat-icon>

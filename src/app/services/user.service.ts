@@ -51,8 +51,6 @@ export class UserService {
                 }
             ).pipe(catchError((errorRes) => this.handleError(errorRes)),
                 tap((responseData) => {
-                    console.log('Login Successfully');
-                    console.log(responseData);
                     this.handleAuthUser(
                         responseData.email,
                         responseData.localId,
@@ -78,10 +76,11 @@ export class UserService {
             )
             .pipe(
                 map(users => {
-                    let ss = [];
+                    let loginUserData = JSON.parse(localStorage.getItem('userData'));
                     for (const key in users) {
                         if (users.hasOwnProperty(key)) {
                             const user = users[key];
+                            user.loginStatus = (user.email == loginUserData.email);
                             this.users.push(user);
                         }
                     }
@@ -93,7 +92,6 @@ export class UserService {
     }
 
     private handleError(errorRes: HttpErrorResponse) {
-        console.log(errorRes);
         let errorMessage = 'An unknown error occurred!';
         if (!errorRes.error || !errorRes.error.error) {
             return throwError(errorMessage);
@@ -134,8 +132,27 @@ export class UserService {
             userData._token,
             new Date(userData._expirationDate)
         );
+
         if (loggedUser.token) {
             this.userAuth.next(loggedUser);
         }
+    }
+
+    getLoggedInUserInfo() {
+        return this.users.find(x => x.loginStatus == true);
+    }
+
+    updateUser(updatedInfo) {
+        let index = this.users.findIndex((value) => value.loginStatus == true);
+        this.users[index].firstName = updatedInfo.firstName;
+        this.users[index].lastName = updatedInfo.lastName;
+        this.users[index].gender = updatedInfo.gender;
+        this.users[index].address = updatedInfo.address;
+        this.users[index].image = updatedInfo.profileImage;
+
+        return this.http.put(
+            this.apiUrl + 'users.json',
+            this.users
+        );
     }
 }

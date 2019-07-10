@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-
 
 @Component({
   selector: 'app-edit-profile',
@@ -20,15 +17,24 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  ngOnInit() {    
-    //signup form controls and validations
+  ngOnInit() {
+    const loggedInUser = this.userService.getLoggedInUserInfo();
+    if (!loggedInUser) {
+      return this.router.navigate(['/users']);
+    }
+    let firstName = loggedInUser.firstName;
+    let lastName = loggedInUser.lastName;
+    let gender = loggedInUser.gender;
+    let address = loggedInUser.address;
+    this.url = loggedInUser.image;
+    //edit form controls and validations
     this.editProfile = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      gender: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
+      firstName: new FormControl(firstName, Validators.required),
+      lastName: new FormControl(lastName, Validators.required),
+      gender: new FormControl(gender, Validators.required),
+      address: new FormControl(address, Validators.required),
       profileImage: new FormControl(null)
-    })
+    });
   }
 
   onSelectFile(event) {
@@ -46,6 +52,13 @@ export class EditProfileComponent implements OnInit {
       this.formError = true;
       return false;
     }
+
     this.isFetching = true;
+    this.editProfile.value.profileImage = this.url;
+    this.userService.updateUser(this.editProfile.value).subscribe((users) => {
+      this.userService.usersChanged.next(users);
+      this.isFetching = false;
+      return this.router.navigate(['/users']);
+    });
   }
 }

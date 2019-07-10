@@ -9,9 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  isAuthenticated: boolean = false;
   @Input('matMenuTriggerFor') menu: MatMenuPanel<any>
+
+  userData = { image: '', firstName: '', lastName: '' };
+  isAuthenticated: boolean = false;
+  
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
@@ -21,11 +23,14 @@ export class HeaderComponent implements OnInit {
         this.isAuthenticated = true;
       }
     });
+
+    this.userService.usersChanged.subscribe((users) => {
+      this.userData = this.userService.getLoggedInUserInfo();
+    });
   }
 
   onLogout() {
     this.userService.logout();
     this.router.navigate(['/login']);
   }
-
 }
