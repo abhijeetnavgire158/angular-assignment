@@ -18,21 +18,11 @@ export class TodoService {
         this.todosChanged.next(this.todos.slice());
     }
 
-    /*updateTodo(index: number, newTodo: Todo) {
-        this.todos[index] = newTodo;
-        this.todosChanged.next(this.todos.slice());
-    }*/
-
     updateTodo(id: string, newTodo: Todo) {
         let index = this.todos.findIndex((value) => value.id == id);
         this.todos[index] = {...newTodo, id: this.generateId()};
         this.todosChanged.next(this.todos.slice());
     }
-
-    // deleteTodo(index: number) {
-    //     this.todos.splice(index, 1);
-    //     this.todosChanged.next(this.todos.slice());
-    // }
 
     deleteTodo(id: string) {
         var filtered = this.todos.filter(function(value, index, arr){
@@ -50,9 +40,6 @@ export class TodoService {
         this.todosChanged.next(this.todos.slice());
     }
 
-    // getTodoItem(index: number) {
-    //     return this.todos[index];
-    // }
     getTodoItem(id: string) {
         return this.todos.find(x => x.id == id);
     }

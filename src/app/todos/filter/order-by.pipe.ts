@@ -9,14 +9,8 @@ export class OrderByPipe implements PipeTransform {
     if (value.length <= 0 || column == '' ) {
       return value;
     }
-    value.sort(function(a, b) {
-      console.log('asdasdasasdasdasdas');
-      console.log(column);
-      console.log(a.title);
+    value.sort(function(a, b) {      
       if (column == 'title') {
-        
-        console.log(a.title);
-        console.log(b.title);
           var titleA=a.title.toLowerCase();
           var titleB=b.title.toLowerCase();
           if (order) {

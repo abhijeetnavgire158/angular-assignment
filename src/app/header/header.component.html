@@ -20,7 +20,7 @@
                 <li routerLinkActive="active" *ngIf="!isAuthenticated">
                     <a [routerLink]="[ '/signup']">SignUp</a>
                 </li>
-                <li  style="cursor: pointer" *ngIf="isAuthenticated">
+                <li style="cursor: pointer" *ngIf="isAuthenticated">
                     <a (click)="onLogout()">Logout</a>
                 </li>
                 <li>

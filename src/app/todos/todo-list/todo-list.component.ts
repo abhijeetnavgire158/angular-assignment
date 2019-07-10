@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TodoService } from 'src/app/services/todo.service';
 import { tap } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-list',
@@ -56,10 +55,9 @@ export class TodoListComponent implements OnInit {
     }
 
     this.order = value;
-    console.log(this.todos);
   }
 
-  todoSelected(id: string) {    
+  todoSelected(id: string) {
     var index = this.selectedTodos.indexOf(id);
     if (index > -1) {
       this.selectedTodos.splice(index, 1);
@@ -68,7 +66,7 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  onDeleteTodos() {    
+  onDeleteTodos() {
     this.todoService.deleteMultipleTodo(this.selectedTodos);
     this.selectedTodos = [];
   }

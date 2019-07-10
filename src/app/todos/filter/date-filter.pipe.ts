@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DateFilterPipe implements PipeTransform {
 
   transform(value: any, fromDate: string, toDate: string): any {
-    console.log(value);
     if (value.length <= 0 || fromDate == '' || toDate == '') {
       return value;
     }
@@ -18,10 +17,7 @@ export class DateFilterPipe implements PipeTransform {
         resultArray.push(item);
       }
     }
-    console.log('Result Array');
-    console.log(resultArray);
-    console.log('fromDate' + fromDate + '-ss');
-    console.log('fromDate' + toDate + '-ss');
+
     return resultArray;
   }
 

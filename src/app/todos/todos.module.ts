@@ -42,7 +42,7 @@ import { OrderByPipe } from './filter/order-by.pipe';
         TitleFilterPipe,
         LoadingSpinnerComponent,
         DropdownDirective
-       ],
+    ],
     providers: [],
 })
 export class TodosModule { }
