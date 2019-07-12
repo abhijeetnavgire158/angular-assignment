@@ -14,8 +14,9 @@ import { UserComponent } from './user/user.component';
 import { AppRoutingModule } from './app-routing.module';
 //custom module
 import { MatInputsModule } from './mat-inputs.module';
-import { TodosModule } from './todos/todos.module';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
+import { SharedModule } from './shared/shared.module';
+import { TodosModule } from './todos/todos.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
     HttpClientModule,
     AppRoutingModule,
     MatInputsModule,
+    SharedModule,
     TodosModule
   ],
   providers: [],

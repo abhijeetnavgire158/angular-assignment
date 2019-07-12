@@ -5,13 +5,14 @@ import { tap, map, take, exhaustMap, catchError } from 'rxjs/operators';
 
 import { Subject, throwError, BehaviorSubject, Observable } from 'rxjs';
 import { Auth } from '../models/auth.model';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 
 export class UserService {
     apiUrl = 'https://ng-httpmodule.firebaseio.com/';
-    apiKey = 'AIzaSyAs9vhkgrtDsZfHBumFi0fn6Iindsx2P-k'
+    apiKey = environment.firebaseAPIKey; //'AIzaSyAs9vhkgrtDsZfHBumFi0fn6Iindsx2P-k'
     users: User[] = [];
     usersChanged = new Subject<any>();
     // userAuth = new Subject<Auth>();
@@ -69,13 +70,14 @@ export class UserService {
     }
 
     getUsers() {
-        this.users = [];
         return this.http
             .get<User[]>(
                 this.apiUrl + 'users.json'
             )
             .pipe(
                 map(users => {
+                    console.log('PIP Map Call');
+                    this.users = [];
                     let loginUserData = JSON.parse(localStorage.getItem('userData'));
                     for (const key in users) {
                         if (users.hasOwnProperty(key)) {
