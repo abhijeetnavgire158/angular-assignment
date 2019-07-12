@@ -30,7 +30,7 @@
                 <div class="col-xs-12">
                     <br><br>
                     <section class="checkbox-section" formArrayName="categories"
-                        *ngFor="let category of todoForm.controls.categories.controls; let i = index">
+                        *ngFor="let category of categoriesControls; let i = index">
                         <mat-checkbox class="checkbox-margin" type="checkbox" [formControlName]="i">
                             {{categoriesList[i]}}
                         </mat-checkbox>

@@ -15,6 +15,7 @@ const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'users', canActivate: [AuthGuard], component: UserComponent },
     { path: 'users/edit-profile', canActivate: [AuthGuard], component: EditProfileComponent },
+    { path: 'todos', loadChildren: () => import('./todos/todos.module').then(mod => mod.TodosModule) }
 ];
 
 

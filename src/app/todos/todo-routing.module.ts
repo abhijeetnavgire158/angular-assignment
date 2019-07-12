@@ -9,7 +9,7 @@ import { TodoDetailsComponent } from './todo-details/todo-details.component';
 
 const routes: Routes = [
     {
-        path: 'todos', canActivate: [AuthGuard], component: TodosComponent,
+        path: '', canActivate: [AuthGuard], component: TodosComponent,
         children: [
             { path: '', canActivate: [AuthGuard], component: TodoStartComponent },
             { path: 'new', canActivate: [AuthGuard], component: EditTodoItemComponent },

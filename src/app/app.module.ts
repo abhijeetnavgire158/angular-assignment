@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatInputsModule } from './mat-inputs.module';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { SharedModule } from './shared/shared.module';
-import { TodosModule } from './todos/todos.module';
+// import { TodosModule } from './todos/todos.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { TodosModule } from './todos/todos.module';
     AppRoutingModule,
     MatInputsModule,
     SharedModule,
-    TodosModule
+    // TodosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

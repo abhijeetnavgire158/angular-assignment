@@ -33,6 +33,9 @@ export class EditTodoItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  get categoriesControls() {
+    return (this.todoForm.controls.categories as FormArray).controls;
+  }
   onReminderChange() {
     this.todoForm.controls['reminderDate'].setValue(null);
   }
