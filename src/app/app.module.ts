@@ -36,7 +36,6 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     MatInputsModule,
     SharedModule,
-    // TodosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

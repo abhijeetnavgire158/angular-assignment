@@ -5,7 +5,7 @@ import { tap, map, take, exhaustMap, catchError } from 'rxjs/operators';
 
 import { Subject, throwError, BehaviorSubject, Observable } from 'rxjs';
 import { Auth } from '../models/auth.model';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
