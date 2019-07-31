@@ -82,6 +82,9 @@ MIT
 @angular/router
 MIT
 
+@angular/service-worker
+MIT
+
 hammerjs
 MIT
 The MIT License (MIT)

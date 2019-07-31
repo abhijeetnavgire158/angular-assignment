@@ -31,7 +31,11 @@
                     <br><br>
                     <section class="checkbox-section" formArrayName="categories"
                         *ngFor="let category of categoriesControls; let i = index">
-                        <mat-checkbox class="checkbox-margin" type="checkbox" [formControlName]="i">
+                        <mat-checkbox 
+                        class="checkbox-margin" 
+                        type="checkbox" 
+                        color="primary" 
+                        [formControlName]="i">
                             {{categoriesList[i]}}
                         </mat-checkbox>
                     </section>
@@ -41,7 +45,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <section class="checkbox-section">
-                        <mat-checkbox class="checkbox-margin" id="isReminder" (change)="onReminderChange()"
+                        <mat-checkbox color="primary" class="checkbox-margin" id="isReminder" (change)="onReminderChange()"
                             formControlName="isReminder" [(ngModel)]="isReminderChecked">Is Reminder</mat-checkbox>
                         <br><br>
                     </section>
@@ -73,7 +77,10 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <mat-checkbox class="checkbox-margin" formControlName="isPublic">public</mat-checkbox>
+                    <!-- <mat-checkbox class="checkbox-margin" formControlName="isPublic">
+                        public
+                    </mat-checkbox> -->
+                    <mat-slide-toggle color="primary" formControlName="isPublic">public</mat-slide-toggle>
                 </div>
             </div>
         </form>

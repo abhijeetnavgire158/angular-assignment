@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -16,4 +16,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   .mat-checkbox-checked {
     color: #673ab7;
-  }  
+  }
+  
+  .btn-primary , .btn-primary:active, .btn-primary:focus, .btn-primary:focus, .btn-primary:hover,
+   .open > .dropdown-toggle.btn-primary{
+    background-color: #673ab7;
+    border-color: #673ab7;
+  }

@@ -10,7 +10,9 @@ import {
     MatTableModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatExpansionModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -28,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
         MatTableModule,
         MatCheckboxModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatSlideToggleModule,
+        MatExpansionModule
     ],
     exports: [
         MatInputModule,
@@ -40,7 +44,9 @@ import { HttpClientModule } from '@angular/common/http';
         MatTableModule,
         MatCheckboxModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatSlideToggleModule,
+        MatExpansionModule
     ],
     providers: [],
 })

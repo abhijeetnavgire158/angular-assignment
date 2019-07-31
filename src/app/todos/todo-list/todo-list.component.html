@@ -2,53 +2,65 @@
     <div class="col-xs-12">
         <button class="btn btn-success" (click)="onNewTodo()">New ToDo</button> |
         <span *ngIf="selectedTodos.length >= 1">
-            <button class="btn btn-danger"  (click)="onDeleteTodos()">Delete Todos</button> |
+            <button class="btn btn-danger" (click)="onDeleteTodos()">Delete Todos</button> |
         </span>
         <button class="btn btn-primary" (click)="onClearFilter()">Clear Filter</button>
     </div>
 </div>
 <hr>
-<div class="col-xs-12">
-    <mat-form-field>
-        <input matInput [matDatepicker]="picker" name="fromDate" placeholder="Choose a from date"
-            [(ngModel)]="fromDatepicker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    to
-    <mat-form-field>
-        <input matInput [matDatepicker]="picker2" name="toDate" placeholder="Choose a to date"
-            [(ngModel)]="toDatepicker">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
-</div>
-<div class="col-xs-12">
-    <mat-form-field style="width: 100%">
-        <input matInput id="title" [(ngModel)]="filterString" autocomplete="off" placeholder="ToDo Title">
-    </mat-form-field>
-</div>
-<hr>
-<hr>
 <br>
-<hr>
-<div class="row">
-    <div class="col-xs-12">
-        Order By :
-        <a (click)="setOrder('title')" class="sort-todo">
-            Title
-            <span [hidden]="reverse">▼</span>
-            <span [hidden]="!reverse">▲</span>
-        </a>
-        
-    </div>
-</div>
+<mat-accordion color="primary">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Todo list filter
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="col-xs-12">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" name="fromDate" placeholder="Choose a from date"
+                    [(ngModel)]="fromDatepicker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            to
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker2" name="toDate" placeholder="Choose a to date"
+                    [(ngModel)]="toDatepicker">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-xs-12">
+            <mat-form-field style="width: 100%">
+                <input matInput id="title" [(ngModel)]="filterString" autocomplete="off" placeholder="ToDo Title">
+            </mat-form-field>
+        </div>
+        <hr>
+        <hr>
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-xs-12">
+                Order By :
+                <a (click)="setOrder('title')" class="sort-todo">
+                    Title
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </a>
+
+            </div>
+        </div>
+
+    </mat-expansion-panel>
+</mat-accordion>
+<br>
 <div class="row" *ngIf="!isFetching">
     <div class="col-xs-12">
         <app-todo-item
             *ngFor="let todo of todos | dateFilter:fromDatepicker:toDatepicker | titleFilter:filterString | orderBy: order:reverse; let i = index"
-            [todo]="todo"
-            (todoSelected)="todoSelected($event)">
+            [todo]="todo" (todoSelected)="todoSelected($event)">
         </app-todo-item>
     </div>
 </div>

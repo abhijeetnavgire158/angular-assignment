@@ -93,6 +93,7 @@ export class EditTodoItemComponent implements OnInit, CanDeactivateComponent {
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
+    this.isChanges = false;
   }
 
   onSelectFile(event) {
@@ -112,7 +113,6 @@ export class EditTodoItemComponent implements OnInit, CanDeactivateComponent {
     } else {
       this.todoService.addTodo(this.todoForm.value);
     }
-    this.isChanges = false;
     this.onCancel();
   }
 
