@@ -2,13 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { TodoService } from 'src/app/services/todo.service';
+import { CanDeactivateComponent } from '../can-deactivate.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-todo-item',
   templateUrl: './edit-todo-item.component.html',
   styleUrls: ['./edit-todo-item.component.css']
 })
-export class EditTodoItemComponent implements OnInit {
+export class EditTodoItemComponent implements OnInit, CanDeactivateComponent {
   @ViewChild('reminderDatectrl', { static: false }) reminderDatectrl: FormControl;
   id: any;
   editMode = false;
@@ -16,6 +18,7 @@ export class EditTodoItemComponent implements OnInit {
   attachedFile: any;
   isReminderChecked: boolean = false;
   categoriesList: string[];
+  isChanges = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +51,7 @@ export class EditTodoItemComponent implements OnInit {
     let reminderDate = null;
     let isPublic = false;
     let attached = '';
+
     if (this.editMode) {
       const todo = this.todoService.getTodoItem(this.id);
       title = todo.title;
@@ -108,6 +112,7 @@ export class EditTodoItemComponent implements OnInit {
     } else {
       this.todoService.addTodo(this.todoForm.value);
     }
+    this.isChanges = false;
     this.onCancel();
   }
 
@@ -121,5 +126,14 @@ export class EditTodoItemComponent implements OnInit {
     }
 
     return null;
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('HHASHA');
+    if (this.todoForm.dirty && this.todoForm.touched && this.isChanges) {
+      return confirm('You have unsaved changes on this page. Do you want to leave this page and discard your changes or stay on this page?')
+    }
+
+    return true;
   }
 }

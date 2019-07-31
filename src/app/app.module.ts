@@ -16,6 +16,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatInputsModule } from './mat-inputs.module';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { SharedModule } from './shared/shared.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { CanDeactivateGuard } from '../app/todos/can-deactivate.service';
 // import { TodosModule } from './todos/todos.module';
 
 @NgModule({
@@ -36,8 +39,9 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     MatInputsModule,
     SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [],
+  providers: [CanDeactivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
